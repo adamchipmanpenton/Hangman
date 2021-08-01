@@ -26,18 +26,58 @@ public class Hangman {
         this.showHangMan = showHangMan;
     }
 
+    public String getWrongGuess() {
+        return wrongGuess;
+    }
+
+    public void setWrongGuess(String wrongGuess) {
+        this.wrongGuess = wrongGuess;
+    }
+
+    public String getRightGuess() {
+        return rightGuess;
+    }
+
+    public void setRightGuess(String rightGuess) {
+        this.rightGuess = rightGuess;
+    }
 
     private String[] hangManWordBank = {"pizza", "hamburgers", "sandwich", "hotdogs", "spaghetti", "taco" };
     private String hangManWord = hangManWordBank[(int) (Math.random() * hangManWordBank.length)];
     private String guessLetter;
     private String showHangMan;
     private int timesGuessedWrong;
+    private String rightGuess = "";
+    private String wrongGuess = "";
+    private String rightCounter;
 
 
     public void findGuss(){
+//        wrongGuess ="";
+//        rightGuess = "";
+        rightCounter = "true";
+
         for(int i=0; i < hangManWord.length(); i++){
-            System.out.println(hangManWord.charAt(i));
+            if(hangManWord.charAt(i) == guessLetter.charAt(0)){
+                System.out.println("You guessed right: " + hangManWord.charAt(i));
+                rightGuess += guessLetter;
+                System.out.println("Right gusses: " + rightGuess);
+                rightCounter = "false";
+            }
+
+        }if(rightGuess.length() == hangManWord.length()){
+            System.out.println("You guess win!!!!");
+        }else if (rightCounter == "true"){
+            wrongGuess += guessLetter;
+            timesGuessedWrong += 1;
+            System.out.println("Wrong guesses: " + wrongGuess);
+            displayHangMan();
+
+        }else{
+            rightCounter = "true";
         }
+
+
 
     }
 
